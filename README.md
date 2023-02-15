@@ -1,2 +1,2 @@
 # LaberintoPython
-El juego del laberinto (Design Patter) en python
+El juego del laberinto (Design Patterns) en python
