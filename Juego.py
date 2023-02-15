@@ -5,6 +5,7 @@ from Laberinto import Laberinto
 from Habitacion import Habitacion
 from Puerta import Puerta
 from Pared import Pared
+from Bomba import Bomba
 
 class Juego:
     def __init__(self):
@@ -26,12 +27,38 @@ class Juego:
 
         return puerta
 
-    def laberinto2HabitacionesFM(self):
-        #TODO
-        self.laberinto = self.FrabricarLaberinto()
+    def fabricarBomba(self):
+        return Bomba()
 
-        hab1 = fabricarHabitacion(1)
-        hab2 = fabricarHabitacion(2)
+    def obtenerHabitacion(self,num):
+        return self.laberinto.obtenerHabitacion(num)
+
+    def laberinto2HabitacionesFMD(self):
+        #TODO
+        self.laberinto = self.fabricarLaberinto()
+
+        hab1 = self.fabricarHabitacion(1)
+        hab2 = self.fabricarHabitacion(2)
+
+        puerta = self.fabricarPuerta(hab1, hab2)
+
+        bm1 = self.fabricarBomba()
+        bm1.component = self.fabricarPared()
+        hab1.norte = self.fabricarPared()
+        hab1.oeste = self.fabricarPared()
+        hab1.este = self.fabricarPared()
+
+        bm2 = self.fabricarBomba()
+        bm2.component = self.fabricarPared()
+        hab2.sur = self.fabricarPared()
+        hab2.oeste = self.fabricarPared()
+        hab2.este = self.fabricarPared()
+
+        hab1.sur = puerta
+        hab2.norte = puerta
+
+        self.laberinto.agregarHabitacion(hab1)
+        self.laberinto.agregarHabitacion(hab2)
 
     def laberinto2Habitaciones(self):
         self.laberinto = Laberinto()
@@ -57,5 +84,5 @@ class Juego:
         self.laberinto.agregarHabitacion(hab2)
 
 juego = Juego()
-juego.laberinto2Habitaciones()
+juego.laberinto2HabitacionesFMD()
 

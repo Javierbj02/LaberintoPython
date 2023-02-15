@@ -4,4 +4,5 @@
 from Juego import Juego
 
 class JuegoConBombas(Juego):
-    pass
+    
+    def 

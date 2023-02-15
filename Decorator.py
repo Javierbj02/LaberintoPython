@@ -4,4 +4,9 @@
 from ElementoMapa import ElementoMapa
 
 class Decorator(ElementoMapa):
-    pass
+    
+    def __init__(self):
+        self.component = None
+
+    def entrar(self):
+        self.component.entrar()
