@@ -1,11 +1,11 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 
-from Habitación import Habitación
+
 from ElementoMapa import ElementoMapa
 
-class Habitación(ElementoMapa):
-    def __init__(self):
+class Habitacion(ElementoMapa):
+    def __init__(self, num):
         self.norte = None
         self.sur = None
         self.este = None

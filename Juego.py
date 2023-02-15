@@ -1,6 +1,11 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 
+from Laberinto import Laberinto
+from Habitacion import Habitacion
+from Puerta import Puerta
+from Pared import Pared
+
 class Juego:
     def __init__(self):
         self.laberinto = None
@@ -8,9 +13,25 @@ class Juego:
     def fabricarLaberinto(self):
         return Laberinto()
 
+    def fabricarHabitacion(self, unNum):
+        return Habitacion(unNum) 
+
+    def fabricarPared(self):
+        return Pared()
+
+    def fabricarPuerta(self, unaHab, otraHab):
+        puerta = Puerta()
+        puerta.lado1 = unaHab
+        puerta.lado2 = otraHab
+
+        return puerta
+
     def laberinto2HabitacionesFM(self):
         #TODO
         self.laberinto = self.FrabricarLaberinto()
+
+        hab1 = fabricarHabitacion(1)
+        hab2 = fabricarHabitacion(2)
 
     def laberinto2Habitaciones(self):
         self.laberinto = Laberinto()
@@ -37,3 +58,4 @@ class Juego:
 
 juego = Juego()
 juego.laberinto2Habitaciones()
+
