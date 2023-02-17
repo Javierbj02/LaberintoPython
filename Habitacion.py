@@ -12,6 +12,9 @@ class Habitacion(ElementoMapa):
         self.oeste = None
         self.num = num
 
+    def __str__(self):
+        return f"N {self.norte} | O {self.oeste} | S {self.sur} | E {self.este} | NUM: {self.num}"
+
     def entrar(self):
         print("Estás en la habitación ", self.num)
 

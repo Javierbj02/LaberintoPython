@@ -10,3 +10,6 @@ class Laberinto:
 
     def obtenerHabitacion(self, num):
         return self.habitaciones[num]
+
+    def obtenerHabitaciones(self):
+        return self.habitaciones

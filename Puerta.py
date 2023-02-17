@@ -9,6 +9,9 @@ class Puerta(ElementoMapa):
         self.lado1 = None
         self.lado2 = None
 
+    def __str__(self):
+        return f"PUERTA: {self.lado1.num}--{self.lado2.num}, abierta: {self.abierta}"
+
     def entrar(self):
         if self.abierta:
             print("Puedes pasar al otro lado")
@@ -20,3 +23,6 @@ class Puerta(ElementoMapa):
 
     def estaCerrada(self):
         return self.abierta
+
+    def abrirPuerta(self):
+        self.abierta = True
