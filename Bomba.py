@@ -7,6 +7,9 @@ class Bomba(Decorator):
     def __init__(self):
         self.activa = False
 
+    def __str__(self):
+        return f"{self.component} con bomba"
+
     def esBomba(self):
         return True
 
