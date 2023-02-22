@@ -2,4 +2,11 @@
 #-*- coding: utf-8 -*-
 
 class Modo:
-    pass
+    def __init__(self):
+        pass
+
+    def esPerezoso(self):
+        return false
+
+    def esAgresivo(self):
+        return false

@@ -10,3 +10,6 @@ class Agresivo(Modo):
 
     def __str__(self):
         return "Agresivo"
+
+    def esAgresivo(self):
+        return true

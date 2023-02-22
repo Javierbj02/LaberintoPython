@@ -3,7 +3,7 @@
 
 class ElementoMapa:
     def __init__(self):
-        pass
+        self.padre = None
 
     def entrar(self):
         pass

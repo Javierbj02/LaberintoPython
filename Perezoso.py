@@ -10,3 +10,6 @@ class Perezoso(Modo):
 
     def __str__(self):
         return "Perezoso"
+
+    def esPerezoso(self):
+        return true

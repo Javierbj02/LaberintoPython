@@ -3,8 +3,9 @@
 
 
 from ElementoMapa import ElementoMapa
+from Contenedor import Contenedor
 
-class Habitacion(ElementoMapa):
+class Habitacion(Contenedor):
     def __init__(self, num):
         self.norte = None
         self.sur = None
@@ -21,4 +22,8 @@ class Habitacion(ElementoMapa):
     def esHabitacion(self):
         return True
 
+    #Le paso una orientación (Norte(), Sur() etc y un elemento (Pared(), Puerta() etc)).
+    #De la orientacion que le he pasado, llamo a su metodo para ponerle el elemento
+    def ponerEnElemento(self, unaOrientacion, unEm):
+        unaOrientacion.ponerElementoEn(unEm, self)
     

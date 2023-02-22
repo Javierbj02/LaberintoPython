@@ -11,3 +11,9 @@ class Bicho:
     def __str__(self):
         return f"BICHO: posición: {self.posicion.num} | modo: {self.modo} | vida: {self.vidas} | daño: {self.poder}"
 
+    def esPerezoso(self):
+        return self.modo.esPerezoso()
+
+    def esAgresivo(self):
+        return self.modo.esAgresivo()
+

@@ -9,9 +9,12 @@ from Puerta import Puerta
 from Pared import Pared
 from Bomba import Bomba
 from Bicho import Bicho
-from Modo import Modo
 from Perezoso import Perezoso
 from Agresivo import Agresivo
+from Norte import Norte
+from Sur import Sur
+from Oeste import Oeste
+from Este import Este
 
 class Juego:
     def __init__(self):
@@ -21,8 +24,27 @@ class Juego:
     def fabricarLaberinto(self):
         return Laberinto()
 
+    def fabricarNorte(self):
+        return Norte()
+
+    def fabricarSur(self):
+        return Sur()
+
+    def fabricarOeste(self):
+        return Oeste()
+
+    def fabricarEste(self):
+        return Este()
+
+
+
     def fabricarHabitacion(self, unNum):
-        return Habitacion(unNum) 
+        hab = Habitacion(unNum)
+        hab.ponerEnElemento(self.fabricarNorte(),self.fabricarPared())
+        hab.ponerEnElemento(self.fabricarSur(),self.fabricarPared())
+        hab.ponerEnElemento(self.fabricarOeste(),self.fabricarPared())
+        hab.ponerEnElemento(self.fabricarEste(),self.fabricarPared())
+        return hab 
 
     def fabricarPared(self):
         return Pared()
@@ -39,14 +61,8 @@ class Juego:
 
     def obtenerHabitacion(self,num):
         return self.laberinto.obtenerHabitacion(num)
-
-
-
-
-    #Agrega un bicho siempre en la primera habitacion
+    
     def agregarBicho(self, unBicho):
-        hab = self.obtenerHabitacion(0)
-        unBicho.posicion = hab
         self.bichos.append(unBicho)
 
     #agrega un bicho en una habitación random
@@ -95,8 +111,7 @@ class Juego:
         bicho.posicion = unaHab
         return bicho
 
-
-    def laberinto4Habitaciones2Bichos(self):
+    def laberinto4Hab4BichosFM(self):
         self.laberinto = self.fabricarLaberinto()
 
         hab1 = self.fabricarHabitacion(1)
@@ -109,39 +124,28 @@ class Juego:
         puerta2_4 = self.fabricarPuerta(hab2,hab4)
         puerta3_4 = self.fabricarPuerta(hab3,hab4)
 
-        bomba = self.fabricarBomba()
-        bomba.component = self.fabricarPared()
-        hab1.norte = bomba
-        hab1.sur = puerta1_2
-        hab1.oeste = self.fabricarPared()
-        hab1.este = puerta1_3
+        hab1.ponerEnElemento(self.fabricarSur(), puerta1_2)
+        hab1.ponerEnElemento(self.fabricarEste(), puerta1_3)
 
-        hab2.norte = puerta1_2
-        hab2.sur = self.fabricarPared()
-        hab2.oeste = self.fabricarPared()
-        hab2.este = puerta2_4
+        hab2.ponerEnElemento(self.fabricarNorte(), puerta1_2)
+        hab2.ponerEnElemento(self.fabricarEste(), puerta2_4)
 
-        hab3.norte = self.fabricarPared()
-        hab3.sur = puerta3_4
-        hab3.oeste = puerta1_3
-        hab3.este = self.fabricarPared()
+        hab3.ponerEnElemento(self.fabricarSur(), puerta3_4)
+        hab3.ponerEnElemento(self.fabricarOeste(), puerta1_3)
 
-        hab4.norte = puerta3_4
-        hab4.sur = self.fabricarPared()
-        hab4.oeste = puerta2_4
-        hab4.este = self.fabricarPared()
+        hab4.ponerEnElemento(self.fabricarNorte(), puerta3_4)
+        hab4.ponerEnElemento(self.fabricarOeste(), puerta2_4)
 
         self.laberinto.agregarHabitacion(hab1)
         self.laberinto.agregarHabitacion(hab2)
         self.laberinto.agregarHabitacion(hab3)
         self.laberinto.agregarHabitacion(hab4)
 
-        bicho1 = self.fabricarBichoAgresivoEn(hab1)
-        bicho2 = self.fabricarBichoPerezosoEn(hab2)
-        bicho3 = self.fabricarBichoAgresivoEn(hab3)
-        bicho4 = self.fabricarBichoPerezosoEn(hab4)
-
-        self.bichos.extend([bicho1, bicho2, bicho3, bicho4]) 
+        self.agregarBicho(self.fabricarBichoAgresivoEn(hab1))
+        self.agregarBicho(self.fabricarBichoAgresivoEn(hab3))
+        self.agregarBicho(self.fabricarBichoPerezosoEn(hab2))
+        self.agregarBicho(self.fabricarBichoPerezosoEn(hab4))        
+ 
 
     def laberinto2HabitacionesFMD(self):
         self.laberinto = self.fabricarLaberinto()
@@ -193,9 +197,9 @@ class Juego:
         self.laberinto.agregarHabitacion(hab2)
 
 juego = Juego()
-juego.laberinto4Habitaciones2Bichos()
+juego.laberinto4Hab4BichosFM()
 
-print("--ESTO ES PARA PROBAR--")
+
 
 for i in juego.laberinto.habitaciones:
     print(i)
@@ -216,8 +220,3 @@ hab1.sur.abrirPuerta()
 print("--Intentando pasar de la hab. 1 a la hab. 2--")
 hab1.sur.entrar()
 
-print()
-hab1.norte.entrar()
-hab1.norte.activarBomba()
-hab1.norte.entrar()
-hab1.norte.entrar()
